@@ -1,0 +1,59 @@
+{
+  "_comment": "EXAMPLE ONLY. Illustrative structure, not real data.",
+  "report": {
+    "title": "Sales Overview",
+    "audience": "Executive",
+    "theme": { "primary": "#1F4E79", "accent": "#F28E2B", "font": "Segoe UI" }
+  },
+  "dataSource": {
+    "platform": "databricks",
+    "catalog": "samples",
+    "schema": "tpch",
+    "snapshotTimestamp": "YYYY-MM-DDTHH:MM:SSZ"
+  },
+  "kpis": [
+    {
+      "id": "KPI-01",
+      "name": "Total Revenue",
+      "definition": "Sum of extended price after discount",
+      "groundTruthSql": "SELECT SUM(...) FROM ...",
+      "measure": "Total Revenue"
+    }
+  ],
+  "model": {
+    "tables": [
+      { "name": "Orders", "source": "samples.tpch.orders", "grain": "one row per order", "columns": ["o_orderkey", "o_orderdate"] }
+    ],
+    "relationships": [
+      { "from": "Orders[o_custkey]", "to": "Customer[c_custkey]", "cardinality": "many-to-one", "crossFilter": "single" }
+    ]
+  },
+  "measures": [
+    { "name": "Total Revenue", "dax": "SUMX(...)", "format": "#,0", "displayFolder": "Revenue" }
+  ],
+  "pages": [
+    {
+      "name": "Overview",
+      "purpose": "Headline KPIs and revenue trend",
+      "visuals": [
+        {
+          "id": "V-01",
+          "type": "card",
+          "title": "Total Revenue",
+          "kpiId": "KPI-01",
+          "measures": ["Total Revenue"],
+          "position": { "x": 0, "y": 0, "w": 4, "h": 2 }
+        },
+        {
+          "id": "V-02",
+          "type": "lineChart",
+          "title": "Revenue by Month",
+          "axis": "Date[Month]",
+          "measures": ["Total Revenue"],
+          "position": { "x": 0, "y": 2, "w": 12, "h": 5 }
+        }
+      ],
+      "slicers": [{ "field": "Date[Year]", "position": { "x": 8, "y": 0, "w": 4, "h": 2 } }]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Private bootstrap and notes
+instructions.md
+private/
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Secrets and environment
+.env
+.env.*
+*.pem
+*.key
+
+# Generated outputs (may contain data snapshots)
+outputs/*
+!outputs/.gitkeep
+
+# Power BI local artifacts
+powerbi/**/.pbi/
+powerbi/**/*.pbix
+*.bak
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
