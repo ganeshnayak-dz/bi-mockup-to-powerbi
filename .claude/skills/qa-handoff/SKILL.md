@@ -13,7 +13,7 @@ Give the analyst everything needed to review, refine, and publish.
 2. List measures with definitions and validation status (from `outputs/validation-report.md`).
 3. List known gaps versus the mockup (from `outputs/report-build-notes.md`).
 4. Write an analyst checklist: open the `.pbip` in Desktop, refresh credentials, check each page, check slicers, check performance, confirm theme, then publish.
-5. Document the data source, snapshot date, and sensitivity notes (columns excluded).
+5. Document the data source and storage mode (DirectQuery = live; state last validation run time instead of a snapshot date). Add: "After refreshing, ask Claude to re-run QC" (re-validation mode of `dax-writer-validator`).
 
 ## Output
 `outputs/qa-handoff.md`.

@@ -23,4 +23,8 @@ Approved `outputs/mockup/index.html`, `outputs/kpis.md`, feedback notes.
 
 ## Rules
 - Do not add fields or KPIs that were not in the approved mockup/KPI list.
+- **Model tables are direct Databricks tables.** Do not specify `nativeQuery`, SQL joins, or SQL-derived columns: DirectQuery rejects them for Databricks. Keep each source table as its own model table (dimensions related many-to-one) and describe derived columns (labels, sort order, display names) as DAX calculated columns.
+- Avoid sort-by cycles: if a visible column needs a custom sort, spec a hidden `X Code`, a calculated `X Order` from it, and a visible calculated `X` sorted by `X Order` (see `semantic-model-builder`).
+- Use `cardVisual` (not the legacy `card`) as the card visual type in `pages[].visuals`.
+- Unmatched dimension keys appear as (Blank); spec them that way instead of an "Unknown" label.
 - **GATE 3:** stop and ask the user to approve the spec.

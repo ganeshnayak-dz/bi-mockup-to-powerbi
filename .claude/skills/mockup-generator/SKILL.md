@@ -19,6 +19,13 @@ Give stakeholders a realistic, data-grounded preview so the design is approved b
 5. Save the queries used in `outputs/mockup/queries.sql`.
 6. On feedback, change the mockup and list what changed.
 
+## Embedding data reliably
+Query results exist only in the conversation, so embedded data must be copied by hand and **long copies silently lose rows** (a 2,995-row copy came back with 2,830).
+- Ask the query to return each cube as a compact fixed-width base36 string in chunks of at most about 1,000 cells, plus checksums (cell count, sums of every measure, a key checksum).
+- Write each chunk to a scratch file, decode it with a small script, and compare with the query's checksums before building the HTML. Fix a chunk until it matches.
+- After building, run the page script headless (Node with a minimal DOM stub) and compare KPI cards, breakdowns and one filtered slice with the queried values.
+- On Windows the Bash tool may fail; use PowerShell and the Write tool.
+
 ## Outputs
 `outputs/mockup/index.html`, `outputs/mockup/queries.sql`.
 

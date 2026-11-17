@@ -26,6 +26,10 @@ Goal: turn a business request plus real Databricks data into (1) an interactive,
 - **Aggregates only.** Mockups and KPIs use aggregated results. Use `LIMIT` on exploration queries.
 - **Demo scope: sample data only.** This demo runs on sample data from our own Databricks account, not client data. Do not add PII/PHI classification, exclusion, or anonymization steps. If real data is ever connected, that is a separate decision made by the people with access to that data and its policies.
 - **Never write secrets** (tokens, passwords, secrets) to files or the chat. Credentials come from environment variables.
+- **Databricks DirectQuery sources use catalog/schema/table navigation only** (`Databricks.Catalogs`), never native SQL, `Databricks.Query`, or SQL joins; derive columns in DAX. Full recipe and the errors it prevents: `.claude/skills/semantic-model-builder/SKILL.md`.
+- The Databricks host and SQL warehouse path are not secrets; the token is. Ask before opening `.mcp.json` to read the host, read only the host, and use the token in memory only (for example to list warehouses). The user signs in to Databricks inside Power BI Desktop.
+- Avoid circular dependencies: never sort a column by a calculated column that depends on it.
+- Anything not yet loaded in Power BI Desktop (DAX values, query folding, rendering) is untested; say so.
 - Databricks SQL runs asynchronously: start the query, then poll until it completes.
 - Do not claim the Power BI MCP creates report pages. Pages come from PBIR file authoring.
 - Power BI Desktop must be **closed** while report files are written; the user reopens it to view the result.

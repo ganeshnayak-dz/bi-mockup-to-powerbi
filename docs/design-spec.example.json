@@ -9,7 +9,8 @@
     "platform": "databricks",
     "catalog": "samples",
     "schema": "tpch",
-    "snapshotTimestamp": "YYYY-MM-DDTHH:MM:SSZ"
+    "storageMode": "DirectQuery",
+    "mockupSnapshotTimestamp": "YYYY-MM-DDTHH:MM:SSZ"
   },
   "kpis": [
     {

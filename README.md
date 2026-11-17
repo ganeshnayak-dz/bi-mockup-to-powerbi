@@ -61,7 +61,7 @@ This demo uses sample data from our own Databricks account (for example the `sam
 - Query results are sent to the model as context. The demo uses sample data only. If this is ever pointed at real data, the people with access to that data decide the handling rules.
 
 ## 10. Known limitations
-- The mockup is a data snapshot, not live.
+- The HTML mockup is a data snapshot, not live. The Power BI model is DirectQuery (live): refresh the report to get current Databricks data, then ask Claude to "re-run QC" to re-validate measures.
 - The report matches the mockup's layout, KPIs, and chart types, not pixel-for-pixel.
 - Power BI Desktop has no live canvas API, so pages are written as PBIR files and reopened in Desktop. The Authoring MCP covers the semantic model only.
 - Windows is the main supported environment for local Power BI tooling.
