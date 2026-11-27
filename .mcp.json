@@ -2,9 +2,9 @@
   "mcpServers": {
     "databricks": {
       "type": "http",
-      "url": "https://dbc-62578fc7-e122.cloud.databricks.com/api/2.0/mcp/sql",
+      "url": "https://link/api/2.0/mcp/sql",
       "headers": {
-        "Authorization": "Bearer dapi0686278753b18dd281d19166e1d1965c"
+        "Authorization": "Bearer pat"
       }
     }
   }
