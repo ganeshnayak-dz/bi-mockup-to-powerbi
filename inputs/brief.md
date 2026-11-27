@@ -1,37 +1,56 @@
 # Report brief
 
+Fill in this file before starting. Leave a field blank if you don't know it yet; Claude asks for missing key fields at step 1.
+A filled-in example is in `inputs/examples/brief-bakehouse-databricks.md`.
+
 ## Data source
-- Platform: Databricks
-- Catalog / schema: samples.bakehouse
+- Platform:   <!-- Databricks | Excel | Mixed (some tables in Databricks, some in inputs/excel/) -->
+- Data status:   <!-- sample / synthetic / anonymized. Do not use customer PII or PHI. -->
+
+### Databricks tables (if Platform is Databricks or Mixed)
+- Catalog / schema:
 - Tables to use:
-  - sales_transactions (fact; 3,333 rows; 2024-05-01 to 2024-05-17; 48 franchises; 6 products)
-  - sales_franchises (dim: name, city, country, size, supplierID, lat/long)
-  - sales_customers (dim: city, state, country, continent, gender)
-  - sales_suppliers (dim: ingredient, continent, approved)
-  - media_customer_reviews (review text per franchise, review_date)
-  - (media_gold_reviews_chunked: skip, derived text chunks)
+  -
+
+### Excel inputs (if Platform is Excel or Mixed; files go in inputs/excel/)
+<!-- Roles, grain and keys can be guesses; data discovery confirms or corrects them. -->
+| File | Sheet | Role (fact / dimension) | Grain (one row per...) | Key column(s) | Joins to |
+|------|-------|-------------------------|------------------------|---------------|----------|
+|      |       |                         |                        |               |          |
+
+## Wireframe
+- Wireframe:   <!-- provided (files in inputs/wireframe/) | generate (Claude designs it) | ask (Claude asks at the start) -->
+- File(s):
+- Must match:   <!-- e.g. page order, visual types, KPIs, slicers/toggles, relative layout -->
+- Scope:
 
 ## Business objective
-- Question the report must answer: How are the bakery franchises performing on sales, and which products, locations and customer segments drive revenue?
-- Decisions it should support: Which franchises/products to promote or fix, payment mix, supplier dependence per franchise.
+- Question the report must answer:
+- Decisions it should support:
 
 ## Audience
-- Who will use it: Franchise operations / management (test audience)
-- Level of detail (executive summary / analyst deep dive): Executive summary with drill-down by franchise
+- Who will use it:
+- Level of detail (executive summary / analyst deep dive):
 
 ## KPIs
-- Propose KPIs for me (e.g. total revenue, transactions, units sold, average order value, revenue by product, top franchises, payment method mix, review count)
+- <!-- List your KPIs with formulas, or point to inputs/kpi-definitions.md (template: docs/kpi-definitions.template.md), or write "Propose KPIs for me". -->
+- Reference period on cards:   <!-- e.g. latest full month, with vs previous month -->
+
+## Goals (optional targets; never computed from data)
+| Metric | Goal |
+|--------|------|
+|        |      |
 
 ## Filters and slicers
-- Date, franchise, country, franchise size, product, payment method
+-
 
 ## Time range and granularity
-- Full available range (2024-05-01 to 2024-05-17), daily
+-
 
 ## Branding
-- Use a clean default
+-   <!-- e.g. follow the wireframe, company colours, or a clean default -->
 
 ## Constraints
-- Columns to exclude (sensitive): none (demo sample data)
-- Metric definitions that must be followed: Revenue = SUM(totalPrice); totalPrice should be validated against quantity * unitPrice
-- Anonymization needed? (yes/no): no (sample data)
+- Columns to exclude:
+- Metric definitions that must be followed:
+- Anonymization needed? (yes/no):

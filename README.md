@@ -5,7 +5,8 @@ Report mockups are usually drawn by hand from vague requirements, without the re
 
 ## 2. Architecture
 ```
-Brief -> Databricks discovery -> KPI approval -> HTML mockup -> design approval
+Brief (+ optional inputs/excel data, inputs/wireframe layout)
+      -> Databricks and/or Excel discovery -> KPI approval -> HTML mockup -> design approval
       -> design spec (JSON) -> semantic model + DAX validation -> PBIR report
       -> review and publish in Power BI Desktop
 ```
@@ -67,5 +68,15 @@ This demo uses sample data from our own Databricks account (for example the `sam
 - Windows is the main supported environment for local Power BI tooling.
 - Untested early risks: Databricks as the model's data source when created via the Authoring MCP; PBIR generation quality; Desktop Bridge screenshots.
 
-## 11. Optional: Snowflake
+## 11. Optional: Excel data and your own wireframe
+- **Excel / CSV data** (all or part of the data): put the files in `inputs/excel/` (one table per sheet, header in row 1),
+  set `Platform: Excel` or `Mixed` in `inputs/brief.md`, and fill the Excel inputs table. Needs Python 3.9+ and
+  `python -m pip install duckdb pandas openpyxl`. Claude queries the files read-only with `scripts/excel_sql.py`,
+  and loads them into Power BI in Import mode (mixed with Databricks = composite model). See `inputs/excel/README.md`
+  and the `excel-adapter` skill.
+- **Wireframe**: put an agreed layout (PDF, images, HTML or PPTX) in `inputs/wireframe/` and Claude builds the mockup
+  and Power BI pages to follow it. If the folder is empty, Claude asks at the start whether you'll add one or want
+  Claude to design it from the data and KPIs. See `inputs/wireframe/README.md` and the `wireframe-intake` skill.
+
+## 12. Optional: Snowflake
 See the `snowflake-adapter` skill in `.claude/skills/`.

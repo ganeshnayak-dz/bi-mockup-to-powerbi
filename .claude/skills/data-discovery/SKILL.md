@@ -1,7 +1,9 @@
 ---
 name: data-discovery
-description: Explore Databricks tables through the Databricks SQL MCP and produce a data profile. Use at the start of a report project or whenever the user asks what data is available.
+description: Explore Databricks tables (and/or Excel/CSV files in inputs/excel) and produce a data profile. Use at the start of a report project or whenever the user asks what data is available.
 ---
+
+> **Excel / mixed sources:** if the brief says `Platform: Excel` or `Mixed`, or `inputs/excel/` has data files, profile those with `scripts/excel_sql.py` following the `excel-adapter` skill. Same profile, same rules.
 
 # Data discovery
 

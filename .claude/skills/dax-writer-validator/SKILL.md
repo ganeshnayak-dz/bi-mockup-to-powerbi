@@ -12,9 +12,10 @@ Create measures and prove they match the source data.
 `outputs/design-spec.json`, the semantic model.
 
 ## Steps
+0. **Analyst-owned DAX:** if the analyst supplied DAX for a measure, use it as written and validate it; propose changes, never silently replace. If a measure's logic depends on a business rule that is not in `outputs/business-rules.md` as confirmed (or the formula is ambiguous), STOP and ask the user before writing it.
 1. For each measure, write the DAX with a format string and display folder (Title Case names, no underscores).
 2. Run it through the Authoring MCP, e.g. `EVALUATE ROW("v", [Measure])`, using the same filters as the SQL.
-3. Run the matching ground-truth SQL on Databricks (read-only, poll async).
+3. Run the matching ground-truth SQL on Databricks (read-only, poll async), or with `scripts/excel_sql.py` for Excel tables (`excel-adapter`). Store `"engine"` with each query.
 4. Compare: exact for counts; small relative tolerance for floating-point sums and ratios (state the tolerance).
 5. Also validate at least one filtered slice and one time slice per KPI.
 6. On mismatch, diagnose (join, filter context, grain, nulls), fix, re-test.
@@ -33,4 +34,4 @@ The model is DirectQuery, so after the user refreshes the report, they can ask C
 
 ## Rules
 - Never mark a mismatch as passed; show the evidence.
-- **GATE 4:** stop and ask the user to accept the validation result.
+- **GATE 4:** stop and ask the user to accept the validation result; log it in `outputs/gate-log.md`.

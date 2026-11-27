@@ -10,9 +10,22 @@ CLAUDE.local.md
 *.pem
 *.key
 
+!.env.example
+
+# User data files (keep only the instructions)
+inputs/excel/*
+!inputs/excel/README.md
+inputs/wireframe/*
+!inputs/wireframe/README.md
+inputs/kpi-definitions.md
+
 # Generated outputs (may contain data snapshots)
 outputs/*
 !outputs/.gitkeep
+
+# Generated Power BI project (built per run)
+powerbi/*
+!powerbi/.gitkeep
 
 # Power BI local artifacts
 powerbi/**/.pbi/

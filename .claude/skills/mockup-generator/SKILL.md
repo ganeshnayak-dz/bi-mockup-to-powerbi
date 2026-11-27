@@ -12,12 +12,15 @@ Give stakeholders a realistic, data-grounded preview so the design is approved b
 `outputs/kpis.md`, `outputs/data-profile.md`, brief (audience, filters, branding).
 
 ## Steps
-1. Plan pages and visuals (KPI cards, trends, breakdowns, tables) that fit the audience. State the layout in a short plan first.
+1. **Layout source.** If `outputs/wireframe-decision.md` says mode `provided`, follow `outputs/wireframe-layout.json` (from `wireframe-intake`): same pages, visual order, grid positions, chart types and theme; show unsupported visuals as labelled placeholders with the gap. Otherwise plan pages and visuals (KPI cards, trends, breakdowns, tables) that fit the audience. State the layout in a short plan first.
 2. Run aggregate queries per visual. For client-side filters, aggregate by the filter dimensions (e.g. month x region x product) and embed that result.
 3. Generate **one self-contained HTML file**: inline CSS and vanilla JS, charts as inline SVG, no external requests or CDNs, data embedded as a JSON constant. Working filters/slicers and page tabs. Responsive layout.
 4. Give every visual a `data-kpi-id` (or `data-visual-id`) attribute. Footer shows the source `catalog.schema`, the snapshot timestamp, and a note that numbers are a snapshot.
 5. Save the queries used in `outputs/mockup/queries.sql`.
 6. On feedback, change the mockup and list what changed.
+
+## Excel sources
+Query Excel tables with `scripts/excel_sql.py --out <file>.json` and build from those JSON files (no hand copying, so the chunking below is not needed for them). Footer source: `inputs/excel/<file> [<sheet>]`. See `excel-adapter`.
 
 ## Embedding data reliably
 Query results exist only in the conversation, so embedded data must be copied by hand and **long copies silently lose rows** (a 2,995-row copy came back with 2,830).
@@ -32,4 +35,4 @@ Query results exist only in the conversation, so embedded data must be copied by
 ## Rules
 - No number without a query; aggregates only.
 - Do not claim the mockup is live.
-- **GATE 2:** stop and ask the user to approve the design.
+- **GATE 2:** stop and ask the user to approve the design. With a provided wireframe, ask whether the mockup matches it and list the gaps.

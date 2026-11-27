@@ -27,6 +27,13 @@ Check "DATABRICKS_HOST set"  ([bool]$env:DATABRICKS_HOST)  'setx DATABRICKS_HOST
 Check "DATABRICKS_TOKEN set" ([bool]$env:DATABRICKS_TOKEN) 'setx DATABRICKS_TOKEN "<read-only-token>"  then open a NEW terminal'
 if ($env:DATABRICKS_HOST -match '^https?://') { Check "DATABRICKS_HOST has no https://" $false "Remove the https:// prefix" }
 
+Write-Host "`n== Excel inputs (optional; only needed if data is in inputs/excel) =="
+if (Get-Command python -ErrorAction SilentlyContinue) {
+  python -c "import duckdb, pandas, openpyxl" 2>$null
+  if ($LASTEXITCODE -eq 0) { Write-Host "[ OK ] Python with duckdb, pandas, openpyxl" -ForegroundColor Green }
+  else { Write-Host "[WARN] Python packages missing -> python -m pip install duckdb pandas openpyxl" -ForegroundColor Yellow }
+} else { Write-Host "[WARN] Python not found -> install Python 3.9+ if you will use Excel inputs" -ForegroundColor Yellow }
+
 if (-not $CheckOnly -and (Get-Command claude -ErrorAction SilentlyContinue)) {
   Write-Host "`n== Power BI authoring plugin =="
   claude plugin marketplace add microsoft/skills-for-fabric
